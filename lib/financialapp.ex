@@ -1,4 +1,9 @@
 defmodule Financialapp do
+  defimpl Jason.Encoder, for: Decimal do
+    def encode(decimal, opts) do
+      Jason.Encode.string(Decimal.to_string(decimal), opts)
+    end
+  end
   @moduledoc """
   Financialapp keeps the contexts that define your domain
   and business logic.

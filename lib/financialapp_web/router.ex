@@ -19,6 +19,12 @@ defmodule FinancialappWeb.Router do
 
     get "/", PageController, :home
   end
+  scope "/api", FinancialappWeb do
+    pipe_through :api
+    resources "/transactions", TransactionController, except: [:new, :edit]
+    resources "/users", UserController, except: [:new, :edit]
+    resources "/tags", TagController, except: [:new, :edit]
+  end
 
   # Other scopes may use custom stacks.
   # scope "/api", FinancialappWeb do

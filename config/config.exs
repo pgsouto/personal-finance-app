@@ -58,6 +58,10 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :financialapp, FinancialappWeb.Auth.Guardian,
+  issuer: "financialapp",
+  secret_key: "0L3N5j9GyQRifqH81F6h8wxWRFaIRzfJkbgZg+JnoHgYf7NX2azYDjxCuxg1flyu"
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
