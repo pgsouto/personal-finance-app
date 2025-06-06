@@ -17,8 +17,8 @@ defmodule Financialapp.Tags do
       [%Tag{}, ...]
 
   """
-  def list_tags do
-    Repo.all(Tag)
+  def list_tags(user_id) do
+    Repo.all(from t in Tag, where: t.user_id == ^user_id)
   end
 
   @doc """

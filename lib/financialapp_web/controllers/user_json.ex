@@ -19,9 +19,7 @@ defmodule FinancialappWeb.UserJSON do
     %{
       id: user.id,
       name: user.name,
-      email: user.email,
-      password: user.password,
-      transactions: Enum.map(user.transactions, &TransactionJSON.data/1)
+      email: user.email
     }
   end
 

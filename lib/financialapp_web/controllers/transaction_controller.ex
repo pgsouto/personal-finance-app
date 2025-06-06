@@ -8,7 +8,8 @@ defmodule FinancialappWeb.TransactionController do
   action_fallback FinancialappWeb.FallbackController
 
   def index(conn, _params) do
-    transactions = Transactions.list_transactions()
+    user = conn.assigns.current_user
+    transactions = Transactions.list_transactions(user.id)
     render(conn, :index, transactions: transactions)
   end
 

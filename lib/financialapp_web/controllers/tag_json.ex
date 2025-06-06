@@ -18,7 +18,8 @@ defmodule FinancialappWeb.TagJSON do
   def data(%Tag{} = tag) do
     %{
       id: tag.id,
-      name: tag.name
+      name: tag.name,
+      user_id: tag.user_id
     }
   end
 end

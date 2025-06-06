@@ -18,7 +18,7 @@ defmodule Financialapp.Account do
 
   """
   def list_users do
-    Repo.all(User) |> Repo.preload(:transactions)
+    Repo.all(User) |> Repo.preload(:transactions) |> Repo.preload(:tags)
   end
 
   @doc """

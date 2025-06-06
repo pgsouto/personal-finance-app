@@ -14,17 +14,42 @@ defmodule FinancialappWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug FinancialappWeb.Auth.Pipeline
+  end
+
   scope "/", FinancialappWeb do
     pipe_through :browser
 
     get "/", PageController, :home
   end
+  ## 🔓 Rotas públicas (não precisam de autenticação)
   scope "/api", FinancialappWeb do
     pipe_through :api
+
+    post "/login", SessionController, :login
+    post "/users", UserController, :create
+
+    # (Se quiser, pode adicionar GET users para listar usuários públicos, mas geralmente é privado)
+  end
+
+    ## 🔒 Rotas protegidas (precisam de token JWT válido)
+  scope "/api", FinancialappWeb do
+    pipe_through [:api, :auth]
+
+        # Usuário
+    get "/users/:id", UserController, :show
+    put "/users/:id", UserController, :update
+    delete "/users/:id", UserController, :delete
+    get "/users", UserController, :index
+
+        # Transações (receitas e despesas)
     resources "/transactions", TransactionController, except: [:new, :edit]
-    resources "/users", UserController, except: [:new, :edit]
+
+        # Categorias (tags)
     resources "/tags", TagController, except: [:new, :edit]
   end
+
 
   # Other scopes may use custom stacks.
   # scope "/api", FinancialappWeb do

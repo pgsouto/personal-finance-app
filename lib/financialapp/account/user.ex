@@ -7,6 +7,7 @@ defmodule Financialapp.Account.User do
     field :password, :string
     field :email, :string
     has_many :transactions, Financialapp.Transactions.Transaction
+    has_many :tags, Financialapp.Tags.Tag
     timestamps(type: :utc_datetime)
   end
 

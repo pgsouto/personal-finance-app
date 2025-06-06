@@ -7,7 +7,8 @@ defmodule FinancialappWeb.TagController do
   action_fallback FinancialappWeb.FallbackController
 
   def index(conn, _params) do
-    tags = Tags.list_tags()
+    user = Guardian.Plug.current_resource(conn)
+    tags = Tags.list_tags(user.id)
     render(conn, :index, tags: tags)
   end
 

@@ -46,6 +46,9 @@ defmodule FinancialappWeb.Endpoint do
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
 
+  # 🔥 CORS habilitado aqui
+  plug CORSPlug, origin: ["http://localhost:5173"]
+
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
